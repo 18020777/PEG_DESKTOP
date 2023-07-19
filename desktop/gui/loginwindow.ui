@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LoginWindow</class>
+ <widget class="QMainWindow" name="LoginWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Paradox Desktop</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="labelTitle">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string>QLabel { color: #b8b8b8; }</string>
+      </property>
+      <property name="text">
+       <string>Paradox Desktop</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+      </property>
+      <property name="margin">
+       <number>10</number>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frameLogo">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string>QFrame#frameLogo {
+        background-image: url(./media/logo.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        }</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="editUsername">
+      <property name="styleSheet">
+       <string>QLineEdit {
+        border: 1px solid #b8b8b8;
+        border-radius: 5px;
+        padding: 5px;
+        background-color: #1e1e1e;
+        color: #b8b8b8;
+        }</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="editPassword">
+      <property name="styleSheet">
+       <string>QLineEdit {
+        border: 1px solid #b8b8b8;
+        border-radius: 5px;
+        padding: 5px;
+        background-color: #1e1e1e;
+        color: #b8b8b8;
+        }</string>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="buttonLogin">
+      <property name="styleSheet">
+       <string>QPushButton {
+        background-color: #D27F35;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 16px;
+        color: white;
+        font-weight: bold;
+        }
+        QPushButton:hover {
+        background-color: #3A3238;
+        }
+        QPushButton:pressed {
+        background-color: #161315;
+        }</string>
+      </property>
+      <property name="text">
+       <string>Connexion</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
