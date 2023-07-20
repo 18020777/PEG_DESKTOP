@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QFrame, QLabel, Q
 import auth
 import config as cf
 import utils as u
-from bookings import APIBookingsClient, BookingElement
+from bookings import APIBookingsClient, BookingElement, APIScenariosClient
 from pui.loginwindow import Ui_LoginWindow
 from pui.mainwindow import Ui_MainWindow
 
@@ -47,6 +47,7 @@ class LoginWindow(Ui_LoginWindow, QMainWindow):
 class MainWindow(Ui_MainWindow, QWidget):
     def __init__(self, token_auth):
         super().__init__()
+        self.scenarios_json = APIScenariosClient()
         self.token_auth = token_auth
         self.timer = QTimer()
         self.setupUi(self)
@@ -55,7 +56,7 @@ class MainWindow(Ui_MainWindow, QWidget):
         self.set_legend()
         self.fetch_bookings()
         self.setup_links()
-        self.timer.start(15000)  # 15 secondes (15 000 millisecondes)
+        self.timer.start(cf.refresh_timer)  # 15 secondes (15 000 millisecondes)
 
     def setup_links(self):
         self.dateToday.dateChanged.connect(self.fetch_bookings)
@@ -77,17 +78,16 @@ class MainWindow(Ui_MainWindow, QWidget):
         bookings = APIBookingsClient(self.token_auth.get_token(), str(self.dateToday.date().toPyDate())).get_data()
         if bookings is not None:
             for booking in bookings['results']:
-                game = BookingElement(booking, self.token_auth.get_token())
+                game = BookingElement(booking, self.scenarios_json.scenarios)
                 frame = QFrame(objectName="bookingItemFrame")  # Ajout du QFrame avec le nom d'objet
                 frame.setStyleSheet(
-                    "QFrame#bookingItemFrame { background-color: #1e1e1e; border-radius: 5px; }")
+                    "QFrame#bookingItemFrame { background-color: " + cf.surface_color + "; }")
                 frame_layout = QVBoxLayout(frame)
                 frame_layout.setContentsMargins(10, 10, 10, 10)
 
                 label = QLabel("")
-                label_str = (f"ID: {game.id}   |   User: {game.username} ({game.first_name} "
-                             f"{game.last_name} - {game.email})   "
-                             f"|   Time: {game.time}   |   Players: {game.num_players}")
+                label_str = (f"ID: {game.id}   |   User: {game.user}   |   Scenario: {game.scn_name}   "
+                             f"|   Salle: {game.room}   |   Time: {game.time}   |   Players: {game.num_players}")
                 label.setObjectName("bookingItemLabel")
                 if game.start_time is not None:
                     label_str = label_str + f"   |   Start time: {game.start_time}"

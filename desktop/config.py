@@ -1,3 +1,32 @@
+import requests
+
+# Refresh timer (milliseconds, >5000)
+refresh_timer = 10000
+
+
+# API base url
+class BaseUrl:
+    _instance = None
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(BaseUrl, cls).__new__(cls)
+        return cls._instance
+
+    def __init__(self):
+        if not hasattr(self, "base_url"):
+            self.base_url = 'http://127.0.0.1:8000/api/'
+
+    def set_base_url(self):
+        try:
+            print(requests.get('http://127.0.0.1:8000/').status_code)
+        except Exception:
+            self.base_url = 'https://sheltered-oasis-16253-bb111470476b.herokuapp.com/api/'
+
+    def get_base_url(self):
+        return self.base_url
+
+
 # Security level
 level = 'is_staff'
 
